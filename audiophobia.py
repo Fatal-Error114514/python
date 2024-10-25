@@ -23,3 +23,4 @@ for _ in iter(input,'0 0 0'):
     print(f'Case #{case}')
     for i in range(problems):
         start, end = map(int,input().split())
+        print(martix[start][end])
