@@ -18,9 +18,12 @@ for _ in iter(input,'0 0 0'):
     for k in range(node):
         for i in range(node):
             for j in range(node):
-                martix[i][j] = min(martix[i][j], martix[i][k] + martix[k][j])
+                if martix[k][j] < martix[i][j] and martix[i][k] < martix[i][j]:
+                    martix[i][j] = max(martix[i][k], martix[k][j])
+#                martix[i][j] = min(martix[i][j], martix[i][k] + martix[k][j])
     
     print(f'Case #{case}')
     for i in range(problems):
         start, end = map(int,input().split())
         print(martix[start][end])
+    case += 1
