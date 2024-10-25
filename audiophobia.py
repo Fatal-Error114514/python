@@ -1,9 +1,7 @@
-from collections import defaultdict
 from math import inf
 
 for _ in iter(input,'0 0 0'):
     case = 1
-    graph = defaultdict(dict)
     node, line, problems = map(int,_.split())
     martix = [[0 for i in range(node)] for i in range(node)]
 
