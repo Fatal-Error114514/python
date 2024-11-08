@@ -1,8 +1,8 @@
 def dp(m, lst):
   table = [0 for i in range(m + 1)]
   for i in lst:
-    for j in range(i, m + 1):
-      table[j] = max(i + table[j - i], table[j - 1])
+    for j in range(m, i - 1, -1):
+      table[j] = max(i + table[j - i], table[j])
   return table[m]
 
 while True:
