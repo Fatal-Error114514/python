@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Optional
 @dataclass
-class Node():
+class Node:
     val: str
     left: Optional['Node'] = None
     right: Optional['Node'] = None
@@ -18,17 +18,17 @@ class Node():
                 self.right = node
     def __str__(self):
         return self.val + str(self.left if self.left else '') + str(self.right if self.right else '')
-
-for i in iter(input,'$'):
-    m = []
-    while True:
-        n = input()
-        if n != '*':
-            for j in n:
-                m.insert(0, j)
-        else:
+m = []
+while True:
+    n = input()
+    if n in '$*':
+        m = m[::-1]
+        root = Node(m[0][0])
+        for i in m[1:]:
+            for j in i:
+                root.Insert(Node(j))
+        print(str(root))
+        m = []
+        if n == '$':
             break
-    root = Node(m[0])
-    for i in m[1:]:
-        root.Insert(Node(i))
-    print(str(root))
+    else: m.append(n)
