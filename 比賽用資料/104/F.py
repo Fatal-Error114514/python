@@ -1,19 +1,43 @@
-"""
-1 2 x
-0 -4 1
+for _ in range(int(input())):
+    m, r, r, n = eval(input())
+    A = [list(map(int,input().split())) for i in range(m)]
+    B = [list(map(int,input().split())) for i in range(r)]
+    AB = [list(map(int,input().split())) for i in range(m)]
+    in_A = any(9999 in i for i in A)
 
-3 1 0 2
--1 2 5 0
-0 -2 2 1
+    if in_A:    # case A
+        for i in range(m):
+            if 9999 in A[i]:
+                row = i
+                temp = A[row].index(9999)
+                for j in range(n):      # 在B裡面找到9999的係數，係數不為0
+                    if B[temp][j] != 0:
+                        col = j
+                        break
+                break
+        ans = 0
+        div = 0
+        for p, q in zip(A[row], list(zip(*B))[col]):
+            if p != 9999:
+                ans += p * q
+            else:
+                div = q
 
-ans:
-1 -1 16 5
-4 -10 -18 1
+    else:       # case B
+        for i in range(r):
+            if 9999 in B[i]:
+                col = B[i].index(9999)
+                for j in range(m):      # 在A裡面找9999的係數，不能為0
+                    if A[j][i] != 0:
+                        row = j
+                        break
+                break
+        div = 0
+        ans = 0
+        for p, q in zip(A[row], list(zip(*B))[col]):
+            if q != 9999:
+                ans += p * q
+            else:
+                div = p
 
-ans[0][0] = (1 * 3) + (2 * -1) + (x * 0) = 1
-ans[1][0] = (0 * 3) + (-4 * -1) + (1 * 0) = 4
-
-ans[0][1] = (1 * 1) + (2 * 2) + (x * -2) = -1
-so... 1 + 4 + 1 = 2x
-x = 3
-"""
+    print((AB[row][col] - ans) // div)
