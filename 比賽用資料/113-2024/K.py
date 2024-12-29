@@ -1,23 +1,9 @@
+from decimal import Decimal
+
+# 不能用round, 因為round是使用bankers rounding, 會有一半的機率會錯誤
 for _ in range(int(input())):
-    is_negative = False
-    n = input()
-    interger, decimal = n.split('.')
-    if '-' in interger:
-        is_negative = True
-        interger = interger[1:]
-    while len(decimal) < 3:
-        decimal += '0'
-    decimal += '0'
-    if decimal[2] >= '5':
-        if decimal[1] == '9':
-            if decimal[0] == '9':
-                interger = str(int(interger) + 1)
-                decimal = '00'
-            else:
-                decimal = str(int(decimal[0]) + 1) + '0'
-        else:
-            decimal = decimal[0] + str(int(decimal[1]) + 1)
-    if is_negative and int(interger) != 0 and int(decimal[:2]) != 0:
-        print('-' + interger + '.' + decimal[:2])
+    s = Decimal(input()).quantize(Decimal('0.01'), rounding='ROUND_HALF_UP')
+    if s == 0.00:
+        print('0.00')
     else:
-        print(interger + '.' + decimal[:2])
+        print(s)
